@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profilo</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Benvenuto {{ username }} nel mio bellissimo forum!!</h1>
+    <p>Qui puoi scrivere i tuoi pensieri e leggere quelli degli altri!</p>
+    <p>Btw la flag si trova in /flag</p>
+    <hr>
+    Vuoi scrivere un nuovo post?
+    <pre>Questa volta sono stato attento e ho messo dei controlli al tuo input.</pre>
+    <form action="/addcomment" method="post" id="comment-form">
+        <textarea name="content" class="form-control" rows="3" required></textarea>
+        <input type="text" name="color" class="form-control mt-3" placeholder="Colore del testo (es. red)">
+        <input type="text" name="image" class="form-control mt-3" placeholder="URL di un immagine carina">
+        <button type="submit" class="btn btn-primary mt-3">Invia</button>
+    </form>
+    <hr>
+
+    <div class="comments-section">
+        <h2>Commenti</h2>
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    <strong>{{ comment[0] }}:</strong> 
+                    <div style="color: {{ comment[2] | safe }}">
+                        {{ comment[1] | safe }}
+                        <img src={{ comment[3] | safe }} width="100" height="100">
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <a href="/logout" class="btn btn-secondary">Logout</a>
+</div>
+<script>
+    document.getElementById('comment-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var textarea = document.querySelector('textarea[name="content"]');
+        var content = textarea.value;
+
+        content = content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        content = content.replace(/<script/g, "&lt;script").replace(/<\/script>/g, "&lt;/script&gt;");
+
+        const validColors = ['red', 'green', 'blue', 'black', 'white', 'yellow', 'purple', 'orange', 'pink', 'brown', 'gray'];
+        var color = document.querySelector('input[name="color"]').value;
+        if (!validColors.includes(color)) {
+            color = 'black';
+        }
+        // cosi' non passa piu' niente
+
+        textarea.value = content;
+        event.target.submit();
+    });
+</script>
+</body>
+</html>

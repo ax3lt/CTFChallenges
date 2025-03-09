@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Profilo - SQLi Cookie Challenge</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Profilo Utente</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} mt-3">{{ message|safe }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <p>Benvenuto, {{ username }}!</p>
+    <p class="text-muted">
+        "Il cookie è la porta segreta. Forse una UNION injection potrebbe rivelare qualcosa di più... chissà, magari una flag nascosta!"
+    </p>
+    <a href="/logout" class="btn btn-secondary mt-3">Logout</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Profilo - CTF Challenge</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Profilo Utente</h2>
+    <p>Ciao, {{ username }}!</p>
+    {% if flag %}
+    <div class="alert alert-warning mt-3">
+        Congratulazioni! Sei admin. Ecco la flag: <strong>{{ flag }}</strong>
+    </div>
+    {% else %}
+    <p class="mt-3">Sei un utente normale... non puoi vedere la flag segreta!</p>
+    {% endif %}
+    <a href="/logout" class="btn btn-secondary mt-3">Logout</a>
+</div>
+</body>
+</html>

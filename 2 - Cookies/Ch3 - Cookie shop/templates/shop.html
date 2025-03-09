@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Negozio</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/cart.js" defer></script>
+</head>
+<body class="text-center">
+<div class="container mt-5">
+    <h1>Il Negozio Segreto! 🛒</h1>
+    <p>Hai <strong id="balance">{{ balance }}</strong> soldi nel tuo portafoglio. Cosa vuoi comprare?</p>
+    <ul class="list-group">
+        {% for item, price in items.items() %}
+        <li class="list-group-item">
+            <strong>{{ item }}</strong> - {{ price }} soldi
+            <button class="btn btn-sm btn-success add-item" data-item="{{ item }}" data-price="{{ price }}">Aggiungi</button>
+        </li>
+        {% endfor %}
+    </ul>
+    <h3 class="mt-3">Totale nel carrello: <span id="total">0</span> soldi</h3>
+    <button id="checkout" class="btn btn-primary mt-3">Compra</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSRF</title>
+</head>
+<body>
+I tuo soldi: 0$
+<form method="GET" action="/transfer">
+    <input type="hidden" name="accountName" value="notanadmin">
+    <input type="hidden" name="amount" value="1000">
+    <button type="submit">Compra 1000$</button>
+</form>
+
+
+Hai qualche suggerimento? Se si inviaci il tuo messaggio sotto forma di link tramite il form, il nostro admin visita il link ogni 10 secondi!
+<form method="POST" action="/contact">
+    <input type="text" name="message" placeholder="Inserisci il tuo messaggio">
+    <button type="submit">Invia</button>
+</form>
+
+</body>
+</html>

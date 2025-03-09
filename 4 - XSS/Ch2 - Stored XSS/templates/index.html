@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Negozio Online</title>
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Negozio Online</h1>
+        <h2 class="text-center">Crea un nuovo prodotto</h2>
+        <form action="/add" method="post">
+            <div class="form-group mb-3">
+                <label for="name">Nome</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="description">Descrizione</label>
+                <input type="text" class="form-control" id="description" name="description" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="price">Prezzo</label>
+                <input type="number" class="form-control" id="price" name="price" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="image">Url immagine</label>
+                <input type="text" class="form-control" id="image" name="image" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Aggiungi</button>
+        </form>
+        <hr>
+        <div class="row">
+            <form action="/" method="get" class="col">
+                <input type="text" id="searchVal" name="q" class="form-control" placeholder="Cerca prodotti...">
+                <button class="btn btn-primary mt-2" id="search" type="submit">Cerca</button>
+            </form>
+            <div class="col">
+                <p>La tua ricerca: {{ query | safe }}</p>
+            </div>
+        </div>
+        <div class="row mt-4" id="products">
+            {% for product in products %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name | safe }}</h5>
+                        <p class="card-text">{{ product.description | safe }}</p>
+                        <p class="card-text text-success">{{ product.price | safe }}€</p>
+                        <img src="{{ product.image | safe }}" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Negozio Online</title>
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Negozio Online</h1>
+    <form action="/" method="get">
+        <input type="text" id="searchVal" name="q" class="form-control" placeholder="Cerca prodotti...">
+        <button class="btn btn-primary mt-2" id="search" type="submit">Cerca</button>
+    </form>
+    <div>
+        <p>La tua ricerca:
+            <script>
+            document.write(decodeURIComponent(document.location.href.split('q=')[1] === undefined ? '' : document.location.href.split('q=')[1].split('&')[0]));
+        </script>
+            </p>
+    </div>
+    <div class="row mt-4" id="products">
+        {% for product in products %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-text text-success">{{ product.price }}€</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!--<script>-->
+<!--    document.getElementById('search').addEventListener('click', function () {-->
+<!--        const value = document.getElementById('searchVal').value;-->
+<!--        fetch('/search?q=' + value)-->
+<!--            .then(response => response.json())-->
+<!--            .then(data => {-->
+<!--                let productsDiv = document.getElementById('products');-->
+<!--                productsDiv.innerHTML = '';-->
+<!--                data.forEach(product => {-->
+<!--                    productsDiv.innerHTML += `-->
+<!--                            <div class="col-md-4">-->
+<!--                                <div class="card mb-4">-->
+<!--                                    <div class="card-body">-->
+<!--                                        <h5 class="card-title">${product.name}</h5>-->
+<!--                                        <p class="card-text">${product.description}</p>-->
+<!--                                        <p class="card-text text-success">${product.price}€</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>`;-->
+<!--                });-->
+<!--                document.getElementById('searchResult').innerHTML = value;-->
+<!--            });-->
+<!--    });-->
+<!--</script>-->
+
+</body>
+</html>

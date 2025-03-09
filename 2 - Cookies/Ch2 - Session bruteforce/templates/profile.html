@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Profilo</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="text-center">
+<div class="container mt-5">
+    <h1>Benvenuto, {{ username }}!</h1>
+    {% if is_admin %}
+    <p class="text-danger">Sei ADMIN! 🎉</p>
+    <div class="bg-dark text-light p-3">
+        FLAG: {{ flag }}
+    </div>
+    {% else %}
+    <p>Non sei admin... 😢, ma come fa il sito a riconoscere se lo sei?</p>
+    {% endif %}
+    <a href="/logout" class="btn btn-danger mt-3">Logout</a>
+</div>
+</body>
+</html>
