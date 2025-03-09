@@ -17,6 +17,12 @@ Se riuscissi a **bypassare la sanitizzazione e iniettare uno script malevolo**, 
 - Prova a sfruttare gli **attributi HTML degli elementi img o div** (`onerror`, `onmouseover`, ecc.).
 - Se riesci a eseguire JavaScript, usa `fetch('/flag')` per ottenere il contenuto della flag.
 
+## Avviare il server:
+```bash
+docker pull ghcr.io/ax3lt/xss-ch3
+docker run -p 80:80 ghcr.io/ax3lt/xss-ch3
+```
+
 [//]: # (- Esempio di payload: `1" onerror="fetch&#40;'/flag'&#41;.then&#40;response => response.text&#40;&#41;&#41;.then&#40;flag => { fetch&#40;'/' + encodeURIComponent&#40;flag&#41;&#41;; }&#41;;"`)
 
 Buona fortuna! 🚀🔓

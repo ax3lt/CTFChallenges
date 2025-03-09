@@ -15,6 +15,12 @@ L'obiettivo? Sfruttare queste vulnerabilità per recuperare la flag nascosta nel
 - **Estrai carattere per carattere il valore della flag**
 - **Recupera il contenuto della colonna `flag` dalla tabella `flag`**
 
+## Avviare il server:
+```bash
+docker pull ghcr.io/ax3lt/sqli-ch3
+docker run -p 80:80 ghcr.io/ax3lt/sqli-ch3
+```
+
 ## Punti Vulnerabili
 La query vulnerabile si trova nella route `/profile`:
 ```sql

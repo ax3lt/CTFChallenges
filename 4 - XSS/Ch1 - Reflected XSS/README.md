@@ -16,4 +16,10 @@ Sarà possibile iniettare uno script dannoso e rubare informazioni sensibili?
 - Prova a iniettare un payload come `<script>alert('XSS!')</script>`.
 - Potresti anche provare payload più avanzati per esfiltrare dati sensibili.
 
+## Avviare il server:
+```bash
+docker pull ghcr.io/ax3lt/xss-ch1
+docker run -p 80:80 ghcr.io/ax3lt/xss-ch1
+```
+
 Buona fortuna! 🚀🔓

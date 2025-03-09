@@ -8,8 +8,8 @@ L'applicazione utilizza i cookie per memorizzare il saldo dell'utente e il total
 
 ### Avvio:
 ```bash
-docker build -t cookie_hacking_challenge .
-docker run -p 80:80 cookie_hacking_challenge
+docker pull ghcr.io/ax3lt/cookie-ch3
+docker run -p 80:80 ghcr.io/ax3lt/cookie-ch3
 
 ```
 

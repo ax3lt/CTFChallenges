@@ -20,4 +20,10 @@ Puoi modificarla sfruttando una SQL Injection?
 - Prova ad inserire caratteri speciali nel campo username o password.
 - Ricorda che in alcuni database o configurazioni ' OR '1'='1 può sempre restituire un utente valido.
 
+## Avviare il server:
+```bash
+docker pull ghcr.io/ax3lt/sqli-ch1
+docker run -p 80:80 ghcr.io/ax3lt/sqli-ch1
+```
+
 Buona fortuna! 🕵️‍♂️🔥

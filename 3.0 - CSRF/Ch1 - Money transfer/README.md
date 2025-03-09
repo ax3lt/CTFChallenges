@@ -14,3 +14,9 @@ Sarà possibile sfruttare questa vulnerabilità per far sì che l'admin trasferi
 - Il sito non usa un token CSRF per proteggere il form di trasferimento.
 - L'admin visita automaticamente i link che gli invii attraverso il form "contact".
 - Ispeziona il form di trasferimento e scopri come inviare una richiesta di trasferimento di denaro.
+
+## Avviare il server:
+```bash
+docker pull ghcr.io/ax3lt/csrf-ch1
+docker run -p 80:80 ghcr.io/ax3lt/csrf-ch1
+```

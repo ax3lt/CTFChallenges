@@ -16,4 +16,10 @@ Sarà possibile sfruttare questa vulnerabilità per accedere al pannello admin e
 - Prova a inserire un URL interno al server stesso, come `http://127.0.0.1:81/flag`.
 - Se il sistema non blocca richieste interne, dovresti vedere il contenuto della flag nella risposta.
 
+## Avviare il server:
+```bash
+docker pull ghcr.io/ax3lt/ssrf-ch1
+docker run -p 80:80 ghcr.io/ax3lt/ssrf-ch1
+```
+
 Buona fortuna! 🚀🔓

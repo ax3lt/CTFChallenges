@@ -14,6 +14,12 @@ L'obiettivo? Sfruttare queste vulnerabilità per recuperare la flag nascosta nel
 - **Costruisci una UNION injection per leggere la flag dalla tabella segreta**
 - **Recupera il valore di della flag**
 
+## Avviare il server:
+```bash
+docker pull ghcr.io/ax3lt/sqli-ch2
+docker run -p 80:80 ghcr.io/ax3lt/sqli-ch2
+```
+
 ## Suggerimenti
 - Il codice nella pagina profilo usa questa query vulnerabile:
 ```sql

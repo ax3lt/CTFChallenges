@@ -13,8 +13,8 @@ Ottieni accesso all'account **admin** per ottenere la flag.
 
 ### Avviare il server:
 ```bash
-docker build -t cookie_challenge .
-docker run -p 8080:80 cookie_challenge //TODO update this with image link
+docker pull ghcr.io/ax3lt/cookie-ch1
+docker run -p 8080:80 ghcr.io/ax3lt/cookie-ch1
 ```
 
 ### Codice:

@@ -9,8 +9,8 @@ Questo permette di forzare manualmente o via script il token admin.
 
 ### Avvio:
 ```bash
-docker build -t bruteforce_cookie_challenge .
-docker run -p 80:80 bruteforce_cookie_challenge
+docker pull ghcr.io/ax3lt/cookie-ch2
+docker run -p 80:80 ghcr.io/ax3lt/cookie-ch2
 ```
 
 ### Codice (Python):

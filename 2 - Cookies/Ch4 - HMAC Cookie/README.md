@@ -16,8 +16,8 @@ Ottieni accesso all'account **admin** per ottenere la flag.
 
 ### Avviare il server:
 ```bash
-docker build -t hmac_cookie_challenge .
-docker run -p 80:80 hmac_cookie_challenge
+docker pull ghcr.io/ax3lt/cookie-ch4
+docker run -p 80:80 ghcr.io/ax3lt/cookie-ch4
 ```
 
 ### Codice (Python):
