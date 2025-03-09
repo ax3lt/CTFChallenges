@@ -13,6 +13,7 @@
   - [SSRF](#ssrf)
   - [XSS](#xss)
   - [SQLI](#sqli)
+- [Repository GitHub](#repository-github)
 - [Comandi Utili](#comandi-utili)
 - [Risoluzione Problemi](#risoluzione-problemi)
 - [Note Tecniche](#note-tecniche)
@@ -96,6 +97,16 @@ http://localhost:8000
 | sqli-ch1 | WhiteBox Injection |
 | sqli-ch2 | Union Injection Filtered |
 | sqli-ch3 | Time Based Blind Injection |
+
+## 📦 Repository GitHub
+Per ogni sfida CTF è disponibile ulteriore documentazione e informazioni dettagliate nella repository ufficiale su GitHub. Visita la pagina della repository per:
+
+- 📄 Descrizioni complete delle challenge
+- 🔍 Dettagli tecnici aggiuntivi
+- 💻 Codice sorgente e implementazione
+- 🛠️ Guide per la risoluzione e suggerimenti
+
+La repository è accessibile all'indirizzo: [github.com/ax3lt](https://github.com/ax3lt/CTFChallenges)
 
 ## 🛠️ Comandi Utili
 

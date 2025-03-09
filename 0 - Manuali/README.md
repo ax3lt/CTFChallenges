@@ -4,6 +4,7 @@
 - [Panoramica](#panoramica)
 - [Struttura della Documentazione](#struttura-della-documentazione)
 - [Guide Disponibili](#guide-disponibili)
+- [Repository GitHub](#repository-github)
 - [Per Iniziare](#per-iniziare)
 
 ## 🎯 Panoramica
@@ -36,6 +37,16 @@ Benvenuto nella documentazione completa della piattaforma CTF. Questa raccolta d
 - ✅ Partecipazione alle sfide
 - ✅ Gestione del profilo
 - ✅ Tracking dei progressi
+
+## 📦 Repository GitHub
+Per ogni sfida CTF presentata in questa piattaforma, è disponibile ulteriore documentazione e codice sorgente nella repository ufficiale su GitHub. Visita la pagina della repository per:
+
+- 📑 Documentazione dettagliata di ogni challenge
+- 💻 Codice sorgente delle sfide
+- 🔍 Suggerimenti e soluzioni proposte
+- 🚀 Aggiornamenti e miglioramenti delle challenge
+
+La repository è accessibile all'indirizzo: [github.com/ax3lt](https://github.com/ax3lt/CTFChallenges)
 
 ## 🚀 Per Iniziare
 
