@@ -101,11 +101,11 @@
 1. Click "Aggiungi nuova immagine"
 2. Compila modal:
    - 📝 Nome descrittivo
-   - 🔗 Docker Image URL
+   - 🔗 GitHub Container Registry URL (ghcr.io/ax3lt/nome-sfida:latest) non obbligatorio da github
 3. Click "Aggiungi"
 
 ⚠️ Note:
-- URL pubblicamente accessibile
+- URL nel formato ghcr.io/ax3lt/[categoria]-ch[numero]:latest se da github altrimenti è possibile omettere l'url se da docker hub
 - No duplicati
 - Validazione automatica
 
@@ -124,10 +124,20 @@
 - ✅ Elimina se necessario
 
 #### 🔄 Errore Pull
-- ✅ Verifica URL
-- ✅ Controlla accesso pubblico
+- ✅ Verifica URL ghcr.io
+- ✅ Controlla accesso al registro GitHub
 - ✅ Verifica Docker Desktop
 - ✅ Controlla connessione
+
+### 📦 Convenzioni Immagini
+| Categoria | Pattern | URL Completo |
+|-----------|---------|--------------|
+| Introduzione | intro-ch[n] | ghcr.io/ax3lt/intro-ch[n]:latest |
+| Cookies | cookie-ch[n] | ghcr.io/ax3lt/cookie-ch[n]:latest |
+| CSRF | csrf-ch[n] | ghcr.io/ax3lt/csrf-ch[n]:latest |
+| SSRF | ssrf-ch[n] | ghcr.io/ax3lt/ssrf-ch[n]:latest |
+| XSS | xss-ch[n] | ghcr.io/ax3lt/xss-ch[n]:latest |
+| SQLI | sqli-ch[n] | ghcr.io/ax3lt/sqli-ch[n]:latest |
 
 ## 👥 Gestione Utenti
 

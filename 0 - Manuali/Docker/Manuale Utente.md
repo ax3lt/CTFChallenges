@@ -37,16 +37,21 @@ Prima di iniziare, assicurati di avere:
 ### Download delle Immagini
 ```bash
 # Sintassi generale
-docker pull ax3lt/ctfplatform:nome-sfida
+docker pull ghcr.io/ax3lt/nome-sfida:latest
 
-# Esempio
-docker pull ax3lt/ctfplatform:intro-ch1
+# Esempi
+docker pull ghcr.io/ax3lt/intro-ch1:latest
+docker pull ghcr.io/ax3lt/cookie-ch1:latest
+docker pull ghcr.io/ax3lt/xss-ch1:latest
 ```
 
 ### Avvio delle Sfide
 ```bash
 # Sintassi generale
-docker run -p 8000:80 ax3lt/ctfplatform:nome-sfida
+docker run -p 8000:80 ghcr.io/ax3lt/nome-sfida:latest
+
+# Esempio
+docker run -p 8000:80 ghcr.io/ax3lt/intro-ch1:latest
 
 # La sfida sarà accessibile su
 http://localhost:8000
@@ -118,7 +123,7 @@ docker images
 Se la porta 80 è già occupata:
 ```bash
 # Usa una porta alternativa
-docker run -p 8080:80 ax3lt/ctfplatform:nome-sfida
+docker run -p 8080:80 ghcr.io/ax3lt/nome-sfida:latest
 # La sfida sarà su http://localhost:8080
 ```
 
@@ -131,7 +136,7 @@ Se l'immagine non si avvia:
 ### Aggiornamento Immagini
 ```bash
 # Forza il riscariamento di un'immagine
-docker pull ax3lt/ctfplatform:nome-sfida
+docker pull ghcr.io/ax3lt/nome-sfida:latest
 ```
 
 ## 📋 Note Tecniche

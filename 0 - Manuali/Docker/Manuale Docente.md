@@ -48,10 +48,10 @@ docker login
 
 ```bash
 # Sintassi generale
-docker build -t nomeaccount/ctfplatform:nome-sfida ".\ChallengeCTF\categoria\nome-cartella-sfida"
+docker build -t ghcr.io/ax3lt/nome-sfida:latest ".\ChallengeCTF\categoria\nome-cartella-sfida"
 
 # Esempio pratico
-docker build -t docente/ctfplatform:intro-ch1 ".\ChallengeCTF\1 - Introduzione\Ch1"
+docker build -t ghcr.io/ax3lt/intro-ch1:latest ".\ChallengeCTF\1 - Introduzione\Ch1"
 ```
 
 ### Push su Docker Hub
@@ -66,21 +66,21 @@ docker push docente/ctfplatform:intro-ch1
 
 ## 📝 Convenzioni di Naming
 
-| Categoria | Pattern | Esempi |
-|-----------|---------|--------|
-| Introduzione | intro-ch[n] | intro-ch1, intro-ch2 |
-| Cookies | cookies-ch[n] | cookies-ch1, cookies-ch2 |
-| CSRF | csrf-ch[n] | csrf-ch1 |
-| SSRF | ssrf-ch[n] | ssrf-ch1 |
-| XSS | xss-ch[n] | xss-ch1, xss-ch2 |
-| SQLI | sqli-ch[n] | sqli-ch1, sqli-ch2 |
+| Categoria | Pattern | Tag Completo |
+|-----------|---------|--------------|
+| Introduzione | intro-ch[n] | ghcr.io/ax3lt/intro-ch[n]:latest |
+| Cookies | cookie-ch[n] | ghcr.io/ax3lt/cookie-ch[n]:latest |
+| CSRF | csrf-ch[n] | ghcr.io/ax3lt/csrf-ch[n]:latest |
+| SSRF | ssrf-ch[n] | ghcr.io/ax3lt/ssrf-ch[n]:latest |
+| XSS | xss-ch[n] | ghcr.io/ax3lt/xss-ch[n]:latest |
+| SQLI | sqli-ch[n] | ghcr.io/ax3lt/sqli-ch[n]:latest |
 
 ## ❗ Verifica e Troubleshooting
 
 ### Verifica del Push
 ```bash
 # Verifica le immagini caricate
-https://hub.docker.com/r/nomeaccount/ctfplatform/tags
+https://github.com/ax3lt/CTFChallenges/packages
 ```
 
 ### Troubleshooting Comune
@@ -141,10 +141,10 @@ CMD ["node", "src/index.js"]
 
 ```bash
 # Build dell'immagine
-docker build -t tuousername/ctfplatform:mia-sfida ./mia-sfida
+docker build -t ghcr.io/ax3lt/mia-sfida:latest ./mia-sfida
 
-# Push su Docker Hub
-docker push tuousername/ctfplatform:mia-sfida
+# Push su GitHub Container Registry
+docker push ghcr.io/ax3lt/mia-sfida:latest
 ```
 
 ## ⚠️ Note di Sicurezza
