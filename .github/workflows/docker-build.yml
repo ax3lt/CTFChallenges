@@ -3,16 +3,88 @@ name: Build and Push Docker Images
 on:
   push:
     branches: [ "master" ]
+    paths:
+      - '1 - Introduzione/**'
+      - '2 - Cookies/**'
+      - '3.0 - CSRF/**'
+      - '3.1 - SSRF/**'
+      - '4 - XSS/**'
+      - '5 - SQLI/**'
+      - '.github/workflows/docker-build.yml'
   pull_request:
     branches: [ "master" ]
+    paths:
+      - '1 - Introduzione/**'
+      - '2 - Cookies/**'
+      - '3.0 - CSRF/**'
+      - '3.1 - SSRF/**'
+      - '4 - XSS/**'
+      - '5 - SQLI/**'
+      - '.github/workflows/docker-build.yml'
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      intro-ch1: ${{ steps.filter.outputs.intro-ch1 }}
+      intro-ch2: ${{ steps.filter.outputs.intro-ch2 }}
+      cookie-ch1: ${{ steps.filter.outputs.cookie-ch1 }}
+      cookie-ch2: ${{ steps.filter.outputs.cookie-ch2 }}
+      cookie-ch3: ${{ steps.filter.outputs.cookie-ch3 }}
+      cookie-ch4: ${{ steps.filter.outputs.cookie-ch4 }}
+      csrf-ch1: ${{ steps.filter.outputs.csrf-ch1 }}
+      ssrf-ch1: ${{ steps.filter.outputs.ssrf-ch1 }}
+      xss-ch1: ${{ steps.filter.outputs.xss-ch1 }}
+      xss-ch2: ${{ steps.filter.outputs.xss-ch2 }}
+      xss-ch3: ${{ steps.filter.outputs.xss-ch3 }}
+      sqli-ch1: ${{ steps.filter.outputs.sqli-ch1 }}
+      sqli-ch2: ${{ steps.filter.outputs.sqli-ch2 }}
+      sqli-ch3: ${{ steps.filter.outputs.sqli-ch3 }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Check for file changes
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            intro-ch1:
+              - '1 - Introduzione/Ch1/**'
+            intro-ch2:
+              - '1 - Introduzione/Ch2/**'
+            cookie-ch1:
+              - '2 - Cookies/Ch1 - Cookie login/**'
+            cookie-ch2:
+              - '2 - Cookies/Ch2 - Session bruteforce/**'
+            cookie-ch3:
+              - '2 - Cookies/Ch3 - Cookie shop/**'
+            cookie-ch4:
+              - '2 - Cookies/Ch4 - HMAC Cookie/**'
+            csrf-ch1:
+              - '3.0 - CSRF/Ch1 - Money transfer/**'
+            ssrf-ch1:
+              - '3.1 - SSRF/Ch1 - Private Webserver/**'
+            xss-ch1:
+              - '4 - XSS/Ch1 - Reflected XSS/**'
+            xss-ch2:
+              - '4 - XSS/Ch2 - Stored XSS/**'
+            xss-ch3:
+              - '4 - XSS/Ch3 - Stored XSS Forum Wrong Sanitization/**'
+            sqli-ch1:
+              - '5 - SQLI/Ch1 - WhiteBox Injection/**'
+            sqli-ch2:
+              - '5 - SQLI/Ch2 - Union Injection Filtered/**'
+            sqli-ch3:
+              - '5 - SQLI/Ch3 - Time Based Blind Injection/**'
+
   build-and-push:
     runs-on: ubuntu-latest
+    needs: changes
     permissions:
       contents: read
       packages: write
@@ -36,6 +108,7 @@ jobs:
 
       # Introduzione
       - name: Build and push Intro Challenge 1
+        if: needs.changes.outputs.intro-ch1 == 'true'
         uses: docker/build-push-action@v5
         with:
           context: "1 - Introduzione/Ch1"
@@ -44,6 +117,7 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/intro-ch1:latest
 
       - name: Build and push Intro Challenge 2
+        if: needs.changes.outputs.intro-ch2 == 'true'
         uses: docker/build-push-action@v5
         with:
           context: "1 - Introduzione/Ch2"
@@ -53,6 +127,7 @@ jobs:
 
       # Cookies
       - name: Build and push Cookie Challenge 1
+        if: needs.changes.outputs.cookie-ch1 == 'true'
         uses: docker/build-push-action@v5
         with:
           context: "2 - Cookies/Ch1 - Cookie login"
@@ -61,6 +136,7 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/cookie-ch1:latest
 
       - name: Build and push Cookie Challenge 2
+        if: needs.changes.outputs.cookie-ch2 == 'true'
         uses: docker/build-push-action@v5
         with:
           context: "2 - Cookies/Ch2 - Session bruteforce"
@@ -69,6 +145,7 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/cookie-ch2:latest
 
       - name: Build and push Cookie Challenge 3
+        if: needs.changes.outputs.cookie-ch3 == 'true'
         uses: docker/build-push-action@v5
         with:
           context: "2 - Cookies/Ch3 - Cookie shop"
@@ -77,6 +154,7 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/cookie-ch3:latest
 
       - name: Build and push Cookie Challenge 4
+        if: needs.changes.outputs.cookie-ch4 == 'true'
         uses: docker/build-push-action@v5
         with:
           context: "2 - Cookies/Ch4 - HMAC Cookie"
@@ -86,6 +164,7 @@ jobs:
 
       # CSRF
       - name: Build and push CSRF Challenge 1
+        if: needs.changes.outputs.csrf-ch1 == 'true'
         uses: docker/build-push-action@v5
         with:
           context: "3.0 - CSRF/Ch1 - Money transfer"
@@ -95,6 +174,7 @@ jobs:
 
       # SSRF
       - name: Build and push SSRF Challenge 1
+        if: needs.changes.outputs.ssrf-ch1 == 'true'
         uses: docker/build-push-action@v5
         with:
           context: "3.1 - SSRF/Ch1 - Private Webserver"
@@ -104,6 +184,7 @@ jobs:
 
       # XSS
       - name: Build and push XSS Challenge 1
+        if: needs.changes.outputs.xss-ch1 == 'true'
         uses: docker/build-push-action@v5
         with:
           context: "4 - XSS/Ch1 - Reflected XSS"
@@ -112,6 +193,7 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/xss-ch1:latest
 
       - name: Build and push XSS Challenge 2
+        if: needs.changes.outputs.xss-ch2 == 'true'
         uses: docker/build-push-action@v5
         with:
           context: "4 - XSS/Ch2 - Stored XSS"
@@ -120,6 +202,7 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/xss-ch2:latest
 
       - name: Build and push XSS Challenge 3
+        if: needs.changes.outputs.xss-ch3 == 'true'
         uses: docker/build-push-action@v5
         with:
           context: "4 - XSS/Ch3 - Stored XSS Forum Wrong Sanitization"
@@ -129,6 +212,7 @@ jobs:
 
       # SQLI
       - name: Build and push SQLI Challenge 1
+        if: needs.changes.outputs.sqli-ch1 == 'true'
         uses: docker/build-push-action@v5
         with:
           context: "5 - SQLI/Ch1 - WhiteBox Injection"
@@ -137,6 +221,7 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/sqli-ch1:latest
 
       - name: Build and push SQLI Challenge 2
+        if: needs.changes.outputs.sqli-ch2 == 'true'
         uses: docker/build-push-action@v5
         with:
           context: "5 - SQLI/Ch2 - Union Injection Filtered"
@@ -145,6 +230,7 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/sqli-ch2:latest
 
       - name: Build and push SQLI Challenge 3
+        if: needs.changes.outputs.sqli-ch3 == 'true'
         uses: docker/build-push-action@v5
         with:
           context: "5 - SQLI/Ch3 - Time Based Blind Injection"
