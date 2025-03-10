@@ -21,6 +21,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
@@ -34,6 +40,7 @@ jobs:
         with:
           context: "1 - Introduzione/Ch1"
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/intro-ch1:latest
 
       - name: Build and push Intro Challenge 2
@@ -41,6 +48,7 @@ jobs:
         with:
           context: "1 - Introduzione/Ch2"
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/intro-ch2:latest
 
       # Cookies
@@ -49,6 +57,7 @@ jobs:
         with:
           context: "2 - Cookies/Ch1 - Cookie login"
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/cookie-ch1:latest
 
       - name: Build and push Cookie Challenge 2
@@ -56,6 +65,7 @@ jobs:
         with:
           context: "2 - Cookies/Ch2 - Session bruteforce"
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/cookie-ch2:latest
 
       - name: Build and push Cookie Challenge 3
@@ -63,6 +73,7 @@ jobs:
         with:
           context: "2 - Cookies/Ch3 - Cookie shop"
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/cookie-ch3:latest
 
       - name: Build and push Cookie Challenge 4
@@ -70,6 +81,7 @@ jobs:
         with:
           context: "2 - Cookies/Ch4 - HMAC Cookie"
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/cookie-ch4:latest
 
       # CSRF
@@ -78,6 +90,7 @@ jobs:
         with:
           context: "3.0 - CSRF/Ch1 - Money transfer"
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/csrf-ch1:latest
 
       # SSRF
@@ -86,6 +99,7 @@ jobs:
         with:
           context: "3.1 - SSRF/Ch1 - Private Webserver"
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/ssrf-ch1:latest
 
       # XSS
@@ -94,6 +108,7 @@ jobs:
         with:
           context: "4 - XSS/Ch1 - Reflected XSS"
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/xss-ch1:latest
 
       - name: Build and push XSS Challenge 2
@@ -101,6 +116,7 @@ jobs:
         with:
           context: "4 - XSS/Ch2 - Stored XSS"
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/xss-ch2:latest
 
       - name: Build and push XSS Challenge 3
@@ -108,6 +124,7 @@ jobs:
         with:
           context: "4 - XSS/Ch3 - Stored XSS Forum Wrong Sanitization"
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/xss-ch3:latest
 
       # SQLI
@@ -116,6 +133,7 @@ jobs:
         with:
           context: "5 - SQLI/Ch1 - WhiteBox Injection"
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/sqli-ch1:latest
 
       - name: Build and push SQLI Challenge 2
@@ -123,6 +141,7 @@ jobs:
         with:
           context: "5 - SQLI/Ch2 - Union Injection Filtered"
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/sqli-ch2:latest
 
       - name: Build and push SQLI Challenge 3
@@ -130,4 +149,5 @@ jobs:
         with:
           context: "5 - SQLI/Ch3 - Time Based Blind Injection"
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/sqli-ch3:latest 
