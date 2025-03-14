@@ -1,19 +1,35 @@
-# Challenge: CSRF Exploit - Admin Session Hijack
+# Challenge CSRF con HTML Injection
 
 ## Descrizione
-In questa challenge, sei entrato in un sito web con un sistema di trasferimento di denaro molto insicuro.  
-L'amministratore del sito ha una quantità illimitata di denaro e visita periodicamente i link inviati dagli utenti attraverso un form di contatto.  
-Purtroppo, il sito non implementa protezioni contro attacchi **CSRF (Cross-Site Request Forgery)**.  
-Sarà possibile sfruttare questa vulnerabilità per far sì che l'admin trasferisca del denaro nel tuo account?
+Questa challenge illustra una vulnerabilità CSRF (Cross-Site Request Forgery) attraverso l'iniezione di codice HTML. 
 
-## Obiettivo
-- **Sfrutta una vulnerabilità CSRF** per far sì che l'admin trasferisca denaro sul tuo account.
-- **Ottieni almeno 1$ di saldo** nel tuo profilo per ricevere la **FLAG**.
+L'applicazione consente agli utenti di inviare un messaggio HTML che verrà visualizzato dall'amministratore. L'obiettivo è sfruttare questa funzionalità per indurre l'amministratore a eseguire una richiesta di trasferimento fondi involontaria.
+
+## Funzionamento
+1. Registrati e accedi all'applicazione
+2. Crea un messaggio HTML che contiene un form con autosubmit o una richiesta fetch per eseguire un trasferimento
+3. L'admin visiterà automaticamente la pagina con il tuo codice HTML iniettato
+4. Se il tuo codice è corretto, l'admin eseguirà inconsapevolmente un trasferimento di denaro verso il tuo account
+5. Una volta che il tuo saldo è maggiore di zero, otterrai la flag
+
+## Nota sulla realtà degli attacchi CSRF
+In questa challenge, per semplicità, l'HTML dannoso viene inviato e visualizzato sullo stesso server della banca. Tuttavia, come visto a lezione, in un attacco CSRF reale il codice dannoso verrebbe tipicamente ospitato su un sito esterno controllato dall'attaccante. Se l'utente admin fosse già loggato sul sito della banca e visitasse questo sito esterno dannoso, il browser invierebbe automaticamente i cookie di autenticazione nella richiesta al sito della banca, permettendo all'attaccante di eseguire operazioni non autorizzate a nome dell'utente. Questa è l'essenza di un attacco CSRF: sfruttare la fiducia che un sito ha in un browser dell'utente già autenticato.
 
 ## Suggerimenti
-- Il sito non usa un token CSRF per proteggere il form di trasferimento.
-- L'admin visita automaticamente i link che gli invii attraverso il form "contact".
-- Ispeziona il form di trasferimento e scopri come inviare una richiesta di trasferimento di denaro.
+- L'applicazione utilizza pyppeteer per simulare la navigazione dell'admin
+- L'admin accede automaticamente con le credenziali "admin:adminpass"
+- Puoi inserire qualsiasi codice HTML, inclusi form e script
+- Un form con autosubmit o una richiesta fetch che punta a `/transfer?accountName=<username>&amount=1000` potrebbe funzionare
+
+## Esempio di payload funzionante
+```html
+<script>fetch("http://localhost:80/transfer?accountName=a&amount=100");</script>
+```
+
+**NOTA IMPORTANTE**: Nell'esempio sopra, "localhost:80" si riferisce all'indirizzo interno del container Docker. Il bot admin esegue all'interno del container e visita questa URL. Quando crei il tuo payload, devi sempre usare "localhost:80" e NON la porta esterna sulla quale hai mappato il container.
+
+## Obiettivo
+Ottieni la flag eseguendo un trasferimento di denaro verso il tuo account sfruttando la vulnerabilità CSRF.
 
 ## Avviare il server:
 ```bash

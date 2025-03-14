@@ -1,9 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, url_for, flash
-from threading import Thread
-import time
-import requests
 import os
-from flask.sessions import SecureCookieSessionInterface
 
 app = Flask(__name__)
 app.secret_key = "SOME_SECRET_KEY"
@@ -12,20 +8,8 @@ users = {
     "admin": {"password": "adminpass", "balance": 999999999999999999999},
 }
 
-global admin_link
-admin_link = None
-
-#############################################
-def generate_admin_session_cookie(app):
-    """
-    Genera e restituisce un cookie di sessione firmato per l'utente admin.
-    """
-    session_data = {"username": "admin"}
-    serializer = SecureCookieSessionInterface().get_signing_serializer(app)
-    return serializer.dumps(session_data)
-
-ADMIN_SESSION_COOKIE = generate_admin_session_cookie(app)
-#############################################
+global admin_html
+admin_html = None
 
 @app.route('/')
 def index():
@@ -52,8 +36,6 @@ def login():
         if username in users and users[username]["password"] == password:
             session['username'] = username
             flash("Login effettuato!")
-            if username == "admin":
-                return redirect(url_for('admin_dashboard'))
             return redirect(url_for('profile'))
         else:
             flash("Credenziali errate.")
@@ -82,10 +64,8 @@ def profile():
 @app.route('/transfer', methods=['GET', 'POST'])
 def transfer():
     username = session.get('username')
-    if username is not None:
+    if username is not None and username != 'admin':
         return "Solo l'admin può effettuare trasferimenti!", 403
-
-
 
     target_account = request.values.get("accountName")
     try:
@@ -98,37 +78,25 @@ def transfer():
     else:
         users[target_account] = {"password": "", "balance": amount}
 
-    global admin_link
-    admin_link = None
+    global admin_html
+    admin_html = None
     return "Transfer effettuato!"
 
 @app.route('/contact', methods=['POST'])
 def contact():
-    message = request.form.get("message")
-    global admin_link
-    admin_link = message
-    print(f"Link inviato: {message}")
-    print(f"Admin virtuale visiterà il link: {admin_link}")
-    return "Messaggio inviato! L'admin virtuale visiterà il link ogni 10 secondi."
+    html_content = request.form.get("message")
+    global admin_html
+    admin_html = html_content
+    print(f"HTML inviato: {html_content}")
+    print(f"Admin virtuale visiterà la pagina con questo HTML: {admin_html}")
+    return "Messaggio inviato! L'admin virtuale visiterà la pagina ogni 10 secondi."
 
-def admin_auto_visit():
-    s = requests.Session()
-    s.cookies.set("session", ADMIN_SESSION_COOKIE, domain="localhost")
-    print("Cookie di sessione admin hard-coded impostato.")
-
-    global admin_link
-    while True:
-        if admin_link:
-            try:
-                url = 'http://localhost:80' + admin_link
-                resp = s.get(url)
-                print(f"Admin virtuale ha visitato: {url} (Status: {resp.status_code})")
-            except Exception as e:
-                print(f"Errore visitando il link admin: {e}")
-        time.sleep(2)
+@app.route('/admin-view')
+def admin_view():
+    global admin_html
+    if admin_html:
+        return admin_html
+    return "Nessun messaggio da visualizzare"
 
 if __name__ == '__main__':
-    if not os.environ.get("WERKZEUG_RUN_MAIN"):
-        thread = Thread(target=admin_auto_visit, daemon=True)
-        thread.start()
     app.run(debug=False, port=80, host='0.0.0.0')

@@ -1,2 +1,4 @@
-flask==3.0.1
+flask==2.0.1
+werkzeug==2.0.1
 requests==2.26.0
+pyppeteer==1.0.2

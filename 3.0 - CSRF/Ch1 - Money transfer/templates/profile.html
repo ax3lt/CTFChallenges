@@ -23,10 +23,10 @@
     <hr>
 
     <h3>Hai qualche suggerimento?</h3>
-    <p>Se ci invii un link tramite il form sottostante, il nostro admin visiterà tra poco! (inserisci soltanto il percorso relativo da visitare, es. /path?params, il server fa concatenazione localhost:80 + l'input inserito)</p>
+    <p>Se ci invii un messaggio HTML tramite il form sottostante, il nostro admin lo visualizzerà tra poco! Puoi usare qualsiasi codice HTML, inclusi script, form o altri elementi.</p>
     <form method="POST" action="/contact" class="mb-4">
         <div class="mb-3">
-            <input type="text" class="form-control" name="message" placeholder="Inserisci il tuo messaggio (es. URL)" required>
+            <textarea class="form-control" name="message" rows="5" placeholder="Inserisci il tuo codice HTML" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Invia</button>
     </form>
