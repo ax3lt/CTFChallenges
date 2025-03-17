@@ -90,6 +90,7 @@ http://localhost:8000
 | xss-ch1 | Reflected XSS |
 | xss-ch2 | Stored XSS |
 | xss-ch3 | Stored XSS Forum Wrong Sanitization |
+| xss-ch4 | Stored XSS with perfect sanitization |
 
 ### SQLI
 | Sfida | Descrizione |
@@ -174,6 +175,7 @@ docker pull ghcr.io/ax3lt/nome-sfida:latest
 - xss-ch1: Porta 80, no database
 - xss-ch2: Porta 80, database MySQL + bot Chrome
 - xss-ch3: Porta 80, database MySQL + bot Chrome
+- xss-ch4: Porta 80, no database + bot Chrome
 
 #### SQLI
 - sqli-ch1: Porta 80, database MySQL
