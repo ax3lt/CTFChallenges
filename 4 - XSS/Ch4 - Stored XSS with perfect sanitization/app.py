@@ -95,7 +95,7 @@ def addcomment():
     comments.append((username, comment, color, image))
     return redirect(url_for('profile'))
 
-@app.route('/flag', methods=['GET'])
+@app.route('/flag', methods=['GET']) 
 def flag():
     if 'username' not in session:
         return redirect(url_for('login'))
