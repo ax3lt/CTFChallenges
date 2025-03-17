@@ -1,6 +1,8 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, make_response
 
 app = Flask(__name__)
+
+FLAG = "CTF{XSS_Reflected}"
 
 products = [
     {"name": "Laptop", "description": "Laptop potente per il lavoro.", "price": 1200},
@@ -22,7 +24,10 @@ def index():
         results = [p for p in products if query in p['name'].lower() or query in p['description'].lower()]
     else:
         results = products
-    return render_template('index.html', products=results, query=query)
+    
+    response = make_response(render_template('index.html', products=results, query=query))
+    response.set_cookie('flag', FLAG, httponly=False, secure=False, samesite='Lax')
+    return response
 
 if __name__ == '__main__':
     app.run(debug=False)
