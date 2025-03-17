@@ -41,6 +41,7 @@ jobs:
       xss-ch1: ${{ steps.filter.outputs.xss-ch1 }}
       xss-ch2: ${{ steps.filter.outputs.xss-ch2 }}
       xss-ch3: ${{ steps.filter.outputs.xss-ch3 }}
+      xss-ch4: ${{ steps.filter.outputs.xss-ch4 }}
       sqli-ch1: ${{ steps.filter.outputs.sqli-ch1 }}
       sqli-ch2: ${{ steps.filter.outputs.sqli-ch2 }}
       sqli-ch3: ${{ steps.filter.outputs.sqli-ch3 }}
@@ -75,6 +76,8 @@ jobs:
               - '4 - XSS/Ch2 - Stored XSS/**'
             xss-ch3:
               - '4 - XSS/Ch3 - Stored XSS Forum Wrong Sanitization/**'
+            xss-ch4:
+              - '4 - XSS/Ch4 - Stored XSS with perfect sanitization/**'
             sqli-ch1:
               - '5 - SQLI/Ch1 - WhiteBox Injection/**'
             sqli-ch2:
@@ -209,6 +212,15 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/xss-ch3:latest
+
+      - name: Build and push XSS Challenge 4
+        if: needs.changes.outputs.xss-ch4 == 'true'
+        uses: docker/build-push-action@v5
+        with:
+          context: "4 - XSS/Ch4 - Stored XSS with perfect sanitization"
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ env.REGISTRY }}/${{ github.repository_owner }}/xss-ch4:latest
 
       # SQLI
       - name: Build and push SQLI Challenge 1

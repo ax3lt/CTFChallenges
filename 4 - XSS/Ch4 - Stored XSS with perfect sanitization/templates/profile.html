@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profilo Forum</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Includiamo DOMPurify per la sanitizzazione lato client -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.5/purify.min.js"></script>
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Benvenuto {{ username }} nel forum di sicurezza!</h1>
+    <p>Qui puoi scrivere i tuoi pensieri e condividerli con la community.</p>
+    <p>La flag si trova nella pagina <code>/flag</code> accessibile solo dall'admin.</p>
+    <hr>
+    <div class="alert alert-success">
+        <h4>Questa è una versione sicura del forum!</h4>
+        <p>Utilizziamo DOMPurify per garantire che nessun contenuto dannoso possa essere inviato. La tua sicurezza è importante per noi!</p>
+    </div>
+    <form action="/addcomment" method="post" id="comment-form">
+        <div class="form-group">
+            <label for="content">Il tuo messaggio:</label>
+            <textarea name="content" id="content" class="form-control" rows="3" required></textarea>
+        </div>
+        <div class="form-group mt-3">
+            <label for="color">Colore del testo:</label>
+            <input type="text" name="color" id="color" class="form-control" placeholder="Colore (es. red, #ff0000)">
+            <small class="text-muted">Lascia vuoto per utilizzare il colore predefinito.</small>
+        </div>
+        <div class="form-group mt-3">
+            <label for="image">URL di un'immagine:</label>
+            <input type="text" name="image" id="image" class="form-control" placeholder="URL di un'immagine (opzionale)">
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Invia commento</button>
+    </form>
+    <hr>
+
+    <div class="comments-section">
+        <h2>Commenti della community</h2>
+        <ul class="list-group">
+            {% for comment in comments %}
+                <li class="list-group-item">
+                    <strong>{{ comment[0] }} ha scritto:</strong> 
+                    <div style="color: {{ comment[2] | safe }}">
+                        {{ comment[1] | safe }}
+                        {% if comment[3] %}
+                            <img src="{{ comment[3] | safe }}" alt="Immagine" style="max-width: 200px; max-height: 200px; margin-top: 10px;">
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="mt-4">
+        <a href="/logout" class="btn btn-secondary">Logout</a>
+    </div>
+</div>
+
+<script>
+    // Utilizziamo DOMPurify per sanitizzare il contenuto prima dell'invio
+    document.getElementById('comment-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // Otteniamo i valori dai campi
+        var contentInput = document.getElementById('content');
+        var colorInput = document.getElementById('color');
+        var imageInput = document.getElementById('image');
+        
+        // Sanitizziamo tutti i campi con DOMPurify
+        contentInput.value = DOMPurify.sanitize(contentInput.value);
+        colorInput.value = DOMPurify.sanitize(colorInput.value);
+        imageInput.value = DOMPurify.sanitize(imageInput.value);
+        
+        // Validiamo il colore (solo colori CSS validi o formati esadecimali)
+        const colorValue = colorInput.value.trim();
+        if (colorValue && !isValidColor(colorValue)) {
+            colorInput.value = 'black'; // Default a nero se non valido
+        }
+        
+        // Validiamo l'URL dell'immagine
+        const imageURL = imageInput.value.trim();
+        if (imageURL && !isValidURL(imageURL)) {
+            imageInput.value = ''; // Rimuoviamo URL non validi
+        }
+        
+        // Invio del form
+        this.submit();
+    });
+    
+    // Funzione per validare colori
+    function isValidColor(color) {
+        // Lista di colori CSS validi
+        const validNamedColors = ['red', 'blue', 'green', 'black', 'white', 'yellow', 'purple', 
+                                'orange', 'pink', 'brown', 'gray', 'teal', 'navy', 'olive', 'lime'];
+        
+        // Controlla se è un colore nominato valido
+        if (validNamedColors.includes(color.toLowerCase())) {
+            return true;
+        }
+        
+        // Controlla se è un formato esadecimale valido (#RGB or #RRGGBB)
+        const hexRegex = /^#([0-9A-Fa-f]{3}){1,2}$/;
+        return hexRegex.test(color);
+    }
+    
+    // Funzione per validare URL
+    function isValidURL(url) {
+        try {
+            const parsedURL = new URL(url);
+            return ['http:', 'https:'].includes(parsedURL.protocol);
+        } catch (e) {
+            return false;
+        }
+    }
+</script>
+</body>
+</html> 
