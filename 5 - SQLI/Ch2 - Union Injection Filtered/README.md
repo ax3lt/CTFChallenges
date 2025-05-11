@@ -48,7 +48,11 @@ function filterQuery(query) {
 
 [//]: # (```sql)
 
-[//]: # (SELECT table_name FROM information_schema.tables WHERE table_schema=database())
+[//]: # ( SELECT table_name FROM ) 
+
+[//]: # (information_schema.tables WHERE)
+
+[//]: # ( table_schema=database() 
 
 [//]: # (```)
 
