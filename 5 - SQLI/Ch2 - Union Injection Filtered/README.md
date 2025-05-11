@@ -52,7 +52,7 @@ function filterQuery(query) {
 
 [//]: # (information_schema.tables WHERE)
 
-[//]: # ( table_schema=database() 
+[//]: # ( table_schema=database )
 
 [//]: # (```)
 
