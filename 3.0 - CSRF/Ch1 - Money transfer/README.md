@@ -19,12 +19,6 @@ In questa challenge, per semplicità, l'HTML dannoso viene inviato e visualizzat
 - L'applicazione utilizza pyppeteer per simulare la navigazione dell'admin
 - L'admin accede automaticamente con le credenziali "admin:adminpass"
 - Puoi inserire qualsiasi codice HTML, inclusi form e script
-- Un form con autosubmit o una richiesta fetch che punta a `/transfer?accountName=<username>&amount=1000` potrebbe funzionare
-
-## Esempio di payload funzionante
-```html
-<script>fetch("http://localhost:80/transfer?accountName=a&amount=100");</script>
-```
 
 **NOTA IMPORTANTE**: Nell'esempio sopra, "localhost:80" si riferisce all'indirizzo interno del container Docker. Il bot admin esegue all'interno del container e visita questa URL. Quando crei il tuo payload, devi sempre usare "localhost:80" e NON la porta esterna sulla quale hai mappato il container.
 

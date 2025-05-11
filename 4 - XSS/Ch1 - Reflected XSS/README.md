@@ -54,7 +54,7 @@ Per prevenire attacchi XSS, è importante:
 4. Utilizzare framework che gestiscono automaticamente la sanitizzazione
 
 ## Note
-Questa è una challenge didattica che dimostra un concetto base di sicurezza web. In un ambiente reale, queste vulnerabilità potrebbero essere sfruttate per:
+In un ambiente reale, queste vulnerabilità potrebbero essere sfruttate per:
 - Furto di cookie
 - Furto di dati sensibili
 - Manipolazione del DOM

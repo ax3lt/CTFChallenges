@@ -18,7 +18,8 @@ L'obiettivo? Ottenere l'accesso come **admin** per visualizzare la flag nascosta
 ```
 Puoi modificarla sfruttando una SQL Injection?
 - Prova ad inserire caratteri speciali nel campo username o password.
-- Ricorda che in alcuni database o configurazioni ' OR '1'='1 può sempre restituire un utente valido.
+
+[//]: # (- Ricorda che in alcuni database o configurazioni ' OR '1'='1 può sempre restituire un utente valido.)
 
 ## Avviare il server:
 ```bash

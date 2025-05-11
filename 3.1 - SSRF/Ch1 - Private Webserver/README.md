@@ -13,7 +13,6 @@ Sarà possibile sfruttare questa vulnerabilità per accedere al pannello admin e
 
 ## Suggerimenti
 - Il form accetta URL arbitrari e il server esegue richieste senza restrizioni.
-- Prova a inserire un URL interno al server stesso, come `http://127.0.0.1:81/flag`.
 - Se il sistema non blocca richieste interne, dovresti vedere il contenuto della flag nella risposta.
 
 ## Avviare il server:

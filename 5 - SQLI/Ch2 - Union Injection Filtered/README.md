@@ -9,8 +9,7 @@ Hai accesso al codice sorgente di un'applicazione web con diverse vulnerabilità
 L'obiettivo? Sfruttare queste vulnerabilità per recuperare la flag nascosta nella tabella!
 
 ## Obiettivo
-- **Analizza il codice per identificare i punti vulnerabili**
-- **Sfrutta la SQL injection nel cookie 'uid' della pagina profilo**
+- **Sfrutta la SQL injection nel cookie 'uid' della pagina profilo, stando attento al filtro utilizzato per l'esecuzione della query**
 - **Costruisci una UNION injection per leggere la flag dalla tabella segreta**
 - **Recupera il valore di della flag**
 
@@ -49,7 +48,7 @@ function filterQuery(query) {
 
 [//]: # (```sql)
 
-[//]: # (SELECT table_name FROM information_schema.tables WHERE table_schema=database&#40;&#41;)
+[//]: # (SELECT table_name FROM information_schema.tables WHERE table_schema=database())
 
 [//]: # (```)
 
